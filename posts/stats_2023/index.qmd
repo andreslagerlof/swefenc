@@ -1,6 +1,7 @@
 ---
 title: "Tävlingsstatistik 2023"
 author: "Andrés Lagerlöf"
+date: "2023-03-23"
 execute: 
   echo: false
   warning: false
@@ -8,24 +9,16 @@ execute:
 
 ## Bakgrund
 
-I FFFs verksamhetsberättelse ingår årligen ett avsnitt med tävlingsstatistik. De senaste åren har detta avsnitt ökat i omfattning och för verskamhetsåret 2023 innefattar detta avsnitt samtliga uppgifter från en stor mängd svenska tävlingar. Att samlar in dessa uppgifter är en ganska stor arbetsuppgift, men när data väl finns på plats är det relativt enkelt att sammanställa och analysera dataunderlaget.
-
-När nu ändå informationen finns tillgänglig så är det inte en så stor ansträngning att också göra informationen tillgänglig till en vidare grupp än endast FFFare, vilka var den ursprungliga målgruppen.
-
-Jag medger att allt detta är svårt nördigt och jag inser också att intresset av detta sannolikt är näst intill obefintligt. Om det trots allt finns någon mänsklig varelse som delar mitt skadliga intressa av denna typ av statistik är ni välkomna att ta del av innehållet.
-
 I detta första inlägg tänker jag göra en första granskning av vad dataunderlaget kan säga oss om hur många som har tävlat under 2023. Men först lite om den information som allt baseras på.
 
 ```{r}
-#| label: load_libraries
+#| label: setup
 
-library(tidyverse)
 library(here)
-library(scales)
-library(gghighlight)
-library(patchwork)
-library(RColorBrewer)
-library(gt)
+
+source(here("assets", "source_files", "libraries_load.R"))
+
+source(here("assets", "custom_functions", "ggplot_theme.R"))
 ```
 
 ```{r}
@@ -37,27 +30,6 @@ clean_2023 <- readRDS(here("assets", "data", "clean_2023.rds"))
 clean_nordic <- clean_2023 |> 
   filter(status == "N")
 
-no_starts_club <- clean_nordic |> filter(status == "N") |> 
-  count(klubb, sort = TRUE)
-
-no_starts_ind <- clean_nordic |> filter(status == "N") |> 
-  count(namn, klubb, sort = TRUE)
-
-klubb_athlete <- clean_nordic |>  
-  count(klubb, namn, sort = TRUE)
-
-athletes_per_club <- klubb_athlete |> 
-  select(-n) |> 
-  count(klubb, sort = TRUE) |> 
-  na.omit()
-
-victories <- clean_nordic |> 
-  filter(plats == 1) |> 
-  count(klubb, sort = TRUE)
-
-top_3_places <- clean_nordic |> 
-  filter(plats > 4) |> 
-  count(klubb, sort = TRUE)
 ```
 
 ## Dataunderlag
@@ -65,7 +37,7 @@ top_3_places <- clean_nordic |>
 Datat som ligger till grund för det som skrivs här kommer från de tävlingar som finns listade på Svenska [Fäktförbundets hemsida](https://svenskfaktning.se/landslag/svensk-ranking-och-uttagningskriterier/) och som därifrån länkas vidare till [OphardtOnline](https://fencing.ophardt.online/sv/search/rankings/3?season=2023) varifrån man kan välja år. Här har jag valt alla tävlingar som ingår i de olika rankinglistorna (Masters, Nationell Ranking och Uttagning EM/VM) för värja i samtliga ålderskategorier. Desstuom ingår resultat från [S:t Erikscupen](https://fencing.ophardt.online/sv/search/rankings/72) som också den finns OphardtOnline.
 
 ::: callout-important
-Detta innebär att uppgifterna inte omfattar andra vapen än värja eller veteranklasser.
+Detta innebär att uppgifterna inte omfattar lagtävlingar, andra vapen än värja eller veteranklasser.
 :::
 
 Sammantaget är det därför `r clean_2023 |> filter(status == "N") |> distinct(competition) |> count()` unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier, vilket ger en lista på `r clean_nordic |> distinct(competition, age) |> count()` tävlingar.
@@ -92,9 +64,9 @@ competitions |>
 
 Som ni ser ingår det, förutom svenska tävlingar, några få nordiska tävlingar i dataunderlaget.
 
-## 65Om dom tävlande
+## En titt på de som tävlat
 
-Totalt rör det sig om1 `r clean_nordic |> nrow()` starter varav de flesta, eller närmare bestämt `r clean_nordic |> filter(nation == "SWE") |> count()` kommer från Sverige . Men även fäktare från andra länder finns med i dataunderlaget, inklusive Sverige rör det sig om `r clean_nordic |> distinct(nation) |> count()` nationer. Här kan man se vilka som är de 15 vanligaste nationaliteterna bland de startande
+Totalt rör det sig om `r clean_nordic |> nrow()` starter varav de flesta, eller närmare bestämt `r clean_nordic |> filter(nation == "SWE") |> count()` kommer från Sverige . Men även fäktare från andra länder finns med i dataunderlaget, inklusive Sverige rör det sig om `r clean_nordic |> distinct(nation) |> count()` nationer. Här kan man se vilka som är de 15 vanligaste nationaliteterna bland de startande
 
 ```{r}
 #| label: nationality_starters
@@ -112,3 +84,109 @@ clean_nordic |>
     subtitle = "De 15 vanligaste nationaliteterna"
   )
 ```
+
+### Dam och herrfäktning
+
+Låt oss kolla hur det är med jämställdheten
+
+```{r}
+#| label: theme_function
+
+#Define fff_theme() function
+
+theme_fff <- function(){ 
+  
+  theme_minimal() %+replace%    #replace elements we want to change
+    
+    theme(
+      panel.grid.major.x = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.title = element_text(
+        size = rel(1.2)
+      ),
+      plot.title.position = "plot"
+    )
+}  
+
+```
+
+```{r}
+#| label: by_gender
+
+gender <- clean_nordic |> 
+  count(gender) |> 
+  ggplot(aes(x= gender, y = n, fill = gender)) +
+  geom_col() +
+  geom_text(aes(label = n),
+            position = position_stack(vjust = 0.5),
+            color = ("white"),
+            fontface = "bold") +
+  geom_hline(yintercept = 0, size = 0.7) +
+  scale_fill_brewer(palette = "Paired") +
+  labs(
+    subtitle = "Antal starter per åldersklass",
+    x = element_blank(),
+    y = element_blank(),
+    fill = element_blank()
+  ) + 
+  theme_fff()
+
+age_gender <- clean_nordic |> 
+  count(gender, age) |> 
+  ggplot(aes(x= age, y = n, fill = gender)) +
+  geom_col() +
+  geom_text(aes(label = n),
+            position = position_stack(vjust = 0.5),
+            color = ("white"),
+            fontface = "bold") +
+  geom_hline(yintercept = 0, size = 0.7) +
+  scale_fill_brewer(palette = "Paired") +
+  labs(
+    subtitle = "Antal startande uppdelat på damer- och herrar",
+    x = element_blank(),
+    y = element_blank(),
+    fill = element_blank()
+  ) + 
+  theme_fff()
+
+gender_and_age <- gender + age_gender
+
+gender_and_age + plot_annotation(
+  title = "Andel dam- och herrfäktare samt åldersgrupper",
+  caption = "Källa: OphardtOnline")
+```
+
+Oj, vi kan se att det är en övervikt av killar totalt och detta gäller också inom samtliga ålderskategorier, med det lysande undantaget för U20 klassen, där tjejerna är i en överväldigande majoritet.
+
+## De största tävlingarna
+
+Tävlingarna skiljer sig naturligvis år. Vilka tävlingar drar till sig flest fäktare?
+
+```{r}
+
+clean_nordic |> 
+  count(competition, sort = TRUE) |> 
+  slice_head(n = 15) |> 
+  ggplot(aes(x = n, y = fct_reorder(competition, n))) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = n),
+            position = position_stack(vjust = 0.5),
+            color = ("white"),
+            fontface = "bold") +
+  geom_hline(yintercept = 0, size = 0.7) +
+  scale_fill_brewer(palette = "Paired") +
+  labs(
+    title = "De 15 största tävlingarna 2023",
+    subtitle = "Antal starter per tävling",
+    x = element_blank(),
+    y = element_blank(),
+    fill = element_blank()
+  ) + 
+  theme_fff()
+```
+
+IIntressant, här kan vi se att `r clean_nordic |> count(competition, sort = TRUE) |> filter(n >= 100) |> count()` har haft 100 eller fler deltagare. Intressant nog gick endast en av dessa tävlingar i Stockholm nämligen Fillol.
+
+Nu räcker det för den här gången. Nästa gång ska vi se om vi kan ta reda på lite mer om de fäktare som tävlar.
+
+Vi ses då!

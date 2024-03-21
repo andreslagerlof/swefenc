@@ -1,0 +1,79 @@
+---
+title: "Mer om de tävlande"
+author: "Andrés Lagerlöf"
+draft: true
+execute: 
+  echo: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+
+library(here)
+
+source(here("assets", "source_files", "libraries_load.R"))
+
+source(here("assets", "custom_functions", "ggplot_theme.R"))
+```
+
+```{r}
+#| label: read_and_prep_data
+
+
+clean_2023 <- readRDS(here("assets", "data", "clean_2023.rds"))
+
+clean_nordic <- clean_2023 |> 
+  filter(status == "N")
+
+no_starts_club <- clean_nordic |> filter(status == "N") |> 
+  count(klubb, sort = TRUE)
+
+no_starts_ind <- clean_nordic |> filter(status == "N") |> 
+  count(namn, klubb, sort = TRUE)
+
+klubb_athlete <- clean_nordic |>  
+  count(klubb, namn, sort = TRUE)
+
+athletes_per_club <- klubb_athlete |> 
+  select(-n) |> 
+  count(klubb, sort = TRUE) |> 
+  na.omit()
+
+victories <- clean_nordic |> 
+  filter(plats == 1) |> 
+  count(klubb, sort = TRUE)
+
+top_3_places <- clean_nordic |> 
+  filter(plats > 4) |> 
+  count(klubb, sort = TRUE)
+```
+
+Hittills har vi främst kollat på antal starter, men som vi vet är det många fäktare som tävlar mycket och rimligen borde stå för en god andel av antalet starter, dessutom finns det fäktare som ställer upp i flera klasser. Låt oss kolla på hur det är med den saken.
+
+Vi har tidigare kunnat konstatera att det är `r clean_nordic |> nrow()` starter, men antalet unka fäktare är `r clean_nordic |> distinct(namn) |> count()` . Det måste innebära att varje tävlingsfäktare har ställt upp i 3 tävlingar i genomsnitt. Men troligen är alla inte genomsnittliga. Låt oss kolla på vilka som är flitigast när det gäller tävlande.
+
+```{r}
+#| label: no_starts_per_fencer
+
+clean_nordic |>
+  count(namn, klubb, sort = TRUE) |> 
+  filter(n > 9) |> # Add ranking
+  mutate(rank = min_rank(desc(n))) |>
+  relocate(rank, everything()) |>
+  gt() |>
+  tab_header(
+    title = "Flitigaste tävlande under 2023", 
+    subtitle = "Fäktare med minst 10 starter") |>
+  cols_label(
+    namn = "Fäktare", 
+    n = "Antal starter", 
+    rank = "#")
+
+```
+
+Wow, imponerande av Liv och Louise att ha hunnit med hela 18 starter, Moa, Matilda och Elda har också legat i hårt.
+
+Det finns många fler insikter att hämta ur tävlingsstatistiken, men det får anstä till nägsta gång.
+
+Vi hörs igen snart!
