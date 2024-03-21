@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "swefencstats",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 21, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 18, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Tävlingsstatistik 2023\n\n\n\n\n\n\n\n\n\n\n\nAndrés Lagerlöf\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 21, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 18, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -26,5 +26,33 @@
     "title": "Welcome To My Blog",
     "section": "",
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/stats_2023/index.html",
+    "href": "posts/stats_2023/index.html",
+    "title": "Tävlingsstatistik 2023",
+    "section": "",
+    "text": "I FFFs verksamhetsberättelse ingår årligen ett avsnitt med tävlingsstatistik. De senaste åren har detta avsnitt ökat i omfattning och för verskamhetsåret 2023 innefattar detta avsnitt samtliga uppgifter från en stor mängd svenska tävlingar. Att samlar in dessa uppgifter är en ganska stor arbetsuppgift, men när data väl finns på plats är det relativt enkelt att sammanställa och analysera dataunderlaget.\nNär nu ändå informationen finns tillgänglig så är det inte en så stor ansträngning att också göra informationen tillgänglig till en vidare grupp än endast FFFare, vilka var den ursprungliga målgruppen.\nJag medger att allt detta är svårt nördigt och jag inser också att intresset av detta sannolikt är näst intill obefintligt. Om det trots allt finns någon mänsklig varelse som delar mitt skadliga intressa av denna typ av statistik är ni välkomna att ta del av innehållet.\nI detta första inlägg tänker jag göra en första granskning av vad dataunderlaget kan säga oss om hur många som har tävlat under 2023. Men först lite om den information som allt baseras på."
+  },
+  {
+    "objectID": "posts/stats_2023/index.html#bakgrund",
+    "href": "posts/stats_2023/index.html#bakgrund",
+    "title": "Tävlingsstatistik 2023",
+    "section": "",
+    "text": "I FFFs verksamhetsberättelse ingår årligen ett avsnitt med tävlingsstatistik. De senaste åren har detta avsnitt ökat i omfattning och för verskamhetsåret 2023 innefattar detta avsnitt samtliga uppgifter från en stor mängd svenska tävlingar. Att samlar in dessa uppgifter är en ganska stor arbetsuppgift, men när data väl finns på plats är det relativt enkelt att sammanställa och analysera dataunderlaget.\nNär nu ändå informationen finns tillgänglig så är det inte en så stor ansträngning att också göra informationen tillgänglig till en vidare grupp än endast FFFare, vilka var den ursprungliga målgruppen.\nJag medger att allt detta är svårt nördigt och jag inser också att intresset av detta sannolikt är näst intill obefintligt. Om det trots allt finns någon mänsklig varelse som delar mitt skadliga intressa av denna typ av statistik är ni välkomna att ta del av innehållet.\nI detta första inlägg tänker jag göra en första granskning av vad dataunderlaget kan säga oss om hur många som har tävlat under 2023. Men först lite om den information som allt baseras på."
+  },
+  {
+    "objectID": "posts/stats_2023/index.html#dataunderlag",
+    "href": "posts/stats_2023/index.html#dataunderlag",
+    "title": "Tävlingsstatistik 2023",
+    "section": "Dataunderlag",
+    "text": "Dataunderlag\nDatat som ligger till grund för det som skrivs här kommer från de tävlingar som finns listade på Svenska Fäktförbundets hemsida och som därifrån länkas vidare till OphardtOnline varifrån man kan välja år. Här har jag valt alla tävlingar som ingår i de olika rankinglistorna (Masters, Nationell Ranking och Uttagning EM/VM) för värja i samtliga ålderskategorier. Desstuom ingår resultat från S:t Erikscupen som också den finns OphardtOnline.\n\n\n\n\n\n\nImportant\n\n\n\nDetta innebär att uppgifterna inte omfattar andra vapen än värja eller veteranklasser.\n\n\nSammantaget är det därför 20 unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier, vilket ger en lista på 41 tävlingar.\n\n\n\n\n\n\n\n\nTävlingar som ingår i statistiken\n\n\nSvenska och nordiska tävlingar under 2023\n\n\nTävling\nÅldersgrupp\n\n\n\n\n2023 S:t Erikscupen (1)\nU13\n\n\n2023 S:t Erikscupen (1)\nU15\n\n\n2023 S:t Erikscupen (1)\nU20\n\n\n2023 S:t Erikscupen (2)\nU13\n\n\n2023 S:t Erikscupen (2)\nU15\n\n\n2023 S:t Erikscupen (2)\nU20\n\n\n2023 S:t Erikscupen (4)\nU13\n\n\n2023 S:t Erikscupen (4)\nU15\n\n\n2023 S:t Erikscupen (4)\nU20\n\n\n2023 S:t Erikscupen (5)\nU13\n\n\n2023 S:t Erikscupen (5)\nU15\n\n\n2023 S:t Erikscupen (5)\nU20\n\n\n2023 S:t Erikscupen (6)\nU13\n\n\n2023 S:t Erikscupen (6)\nU15\n\n\n2023 S:t Erikscupen (6)\nU20\n\n\nChallenge Bernadotte\nSen\n\n\nChallenge Eugène Fillol\nSen\n\n\nDjurgården Epee\nSen\n\n\nFäktmaran\nSen\n\n\nKungsbacka Masters\nU15\n\n\nKungsbacka Masters\nU17\n\n\nKupittaa Tournament\nSen\n\n\nMalmö International\nSen\n\n\nMalmö Open\nU15\n\n\nMalmö Open\nU17\n\n\nMalmö Open\nU20\n\n\nNordic Championships\nSen\n\n\nNordic Championships\nU20\n\n\nOslo Cup\nSen\n\n\nSM\nSen\n\n\nSM Juniorer\nU20\n\n\nSvenska mästerskapen ungd kad\nU15\n\n\nSvenska mästerskapen ungd kad\nU17\n\n\nUppsala Cup\nSen\n\n\nUppsala Cup\nU15\n\n\nUppsala Cup\nU17\n\n\nUppsala Cup\nU20\n\n\nÖrebro Masters\nSen\n\n\nÖrebro Masters\nU15\n\n\nÖrebro Masters\nU17\n\n\nÖrebro Masters\nU20\n\n\n\nResultat från: OphardtOnline\n\n\n\n\n\n\n\n\nSom ni ser ingår det, förutom svenska tävlingar, några få nordiska tävlingar i dataunderlaget."
+  },
+  {
+    "objectID": "posts/stats_2023/index.html#om-dom-tävlande",
+    "href": "posts/stats_2023/index.html#om-dom-tävlande",
+    "title": "Tävlingsstatistik 2023",
+    "section": "65Om dom tävlande",
+    "text": "65Om dom tävlande\nTotalt rör det sig om1 1850 starter varav de flesta, eller närmare bestämt 1376 kommer från Sverige . Men även fäktare från andra länder finns med i dataunderlaget, inklusive Sverige rör det sig om 29 nationer. Här kan man se vilka som är de 15 vanligaste nationaliteterna bland de startande\n\n\n\n\n\n\n\n\nDe startandes nationalitet\n\n\nDe 15 vanligaste nationaliteterna\n\n\nNationalitet\nAntal starter\n\n\n\n\nSWE\n1376\n\n\nNOR\n163\n\n\nEST\n75\n\n\nDEN\n65\n\n\nFIN\n39\n\n\nLTU\n24\n\n\nLAT\n19\n\n\nUKR\n19\n\n\nITA\n14\n\n\nFRA\n12\n\n\nCHN\n6\n\n\nIRL\n6\n\n\nGER\n5\n\n\nSUI\n5\n\n\nPOL\n3"
   }
 ]

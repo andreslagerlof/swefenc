@@ -1,0 +1,114 @@
+---
+title: "Tävlingsstatistik 2023"
+author: "Andrés Lagerlöf"
+execute: 
+  echo: false
+  warning: false
+---
+
+## Bakgrund
+
+I FFFs verksamhetsberättelse ingår årligen ett avsnitt med tävlingsstatistik. De senaste åren har detta avsnitt ökat i omfattning och för verskamhetsåret 2023 innefattar detta avsnitt samtliga uppgifter från en stor mängd svenska tävlingar. Att samlar in dessa uppgifter är en ganska stor arbetsuppgift, men när data väl finns på plats är det relativt enkelt att sammanställa och analysera dataunderlaget.
+
+När nu ändå informationen finns tillgänglig så är det inte en så stor ansträngning att också göra informationen tillgänglig till en vidare grupp än endast FFFare, vilka var den ursprungliga målgruppen.
+
+Jag medger att allt detta är svårt nördigt och jag inser också att intresset av detta sannolikt är näst intill obefintligt. Om det trots allt finns någon mänsklig varelse som delar mitt skadliga intressa av denna typ av statistik är ni välkomna att ta del av innehållet.
+
+I detta första inlägg tänker jag göra en första granskning av vad dataunderlaget kan säga oss om hur många som har tävlat under 2023. Men först lite om den information som allt baseras på.
+
+```{r}
+#| label: load_libraries
+
+library(tidyverse)
+library(here)
+library(scales)
+library(gghighlight)
+library(patchwork)
+library(RColorBrewer)
+library(gt)
+```
+
+```{r}
+#| label: read_and_prep_data
+
+
+clean_2023 <- readRDS(here("assets", "data", "clean_2023.rds"))
+
+clean_nordic <- clean_2023 |> 
+  filter(status == "N")
+
+no_starts_club <- clean_nordic |> filter(status == "N") |> 
+  count(klubb, sort = TRUE)
+
+no_starts_ind <- clean_nordic |> filter(status == "N") |> 
+  count(namn, klubb, sort = TRUE)
+
+klubb_athlete <- clean_nordic |>  
+  count(klubb, namn, sort = TRUE)
+
+athletes_per_club <- klubb_athlete |> 
+  select(-n) |> 
+  count(klubb, sort = TRUE) |> 
+  na.omit()
+
+victories <- clean_nordic |> 
+  filter(plats == 1) |> 
+  count(klubb, sort = TRUE)
+
+top_3_places <- clean_nordic |> 
+  filter(plats > 4) |> 
+  count(klubb, sort = TRUE)
+```
+
+## Dataunderlag
+
+Datat som ligger till grund för det som skrivs här kommer från de tävlingar som finns listade på Svenska [Fäktförbundets hemsida](https://svenskfaktning.se/landslag/svensk-ranking-och-uttagningskriterier/) och som därifrån länkas vidare till [OphardtOnline](https://fencing.ophardt.online/sv/search/rankings/3?season=2023) varifrån man kan välja år. Här har jag valt alla tävlingar som ingår i de olika rankinglistorna (Masters, Nationell Ranking och Uttagning EM/VM) för värja i samtliga ålderskategorier. Desstuom ingår resultat från [S:t Erikscupen](https://fencing.ophardt.online/sv/search/rankings/72) som också den finns OphardtOnline.
+
+::: callout-important
+Detta innebär att uppgifterna inte omfattar andra vapen än värja eller veteranklasser.
+:::
+
+Sammantaget är det därför `r clean_2023 |> filter(status == "N") |> distinct(competition) |> count()` unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier, vilket ger en lista på `r clean_nordic |> distinct(competition, age) |> count()` tävlingar.
+
+```{r}
+competitions <- clean_2023 |> 
+  filter(status == "N") |> 
+  select(competition, age) |>
+  count(competition, age)
+
+competitions |> 
+  select(-n) |>
+  rename(
+    "Tävling" = competition,
+    "Åldersgrupp" = age) |> 
+  gt() |> 
+  tab_header(
+    title = "Tävlingar som ingår i statistiken",
+    subtitle = "Svenska och nordiska tävlingar under 2023"
+  ) |> 
+  tab_source_note(source_note = "Resultat från: OphardtOnline")
+  
+```
+
+Som ni ser ingår det, förutom svenska tävlingar, några få nordiska tävlingar i dataunderlaget.
+
+## 65Om dom tävlande
+
+Totalt rör det sig om1 `r clean_nordic |> nrow()` starter varav de flesta, eller närmare bestämt `r clean_nordic |> filter(nation == "SWE") |> count()` kommer från Sverige . Men även fäktare från andra länder finns med i dataunderlaget, inklusive Sverige rör det sig om `r clean_nordic |> distinct(nation) |> count()` nationer. Här kan man se vilka som är de 15 vanligaste nationaliteterna bland de startande
+
+```{r}
+#| label: nationality_starters
+
+clean_nordic |> 
+  count(nation, sort = TRUE) |> 
+  slice_head(n = 15) |> 
+  rename(
+    "Nationalitet" = nation,
+    "Antal starter" = n
+  ) |> 
+  gt() |> 
+  tab_header(
+    title = "De startandes nationalitet",
+    subtitle = "De 15 vanligaste nationaliteterna"
+  )
+```
