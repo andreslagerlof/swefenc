@@ -1,7 +1,7 @@
 ---
 title: "Mer om de tävlande"
 author: "Andrés Lagerlöf"
-draft: true
+date: "2024-03-22"
 execute: 
   echo: false
   warning: false
@@ -49,6 +49,8 @@ top_3_places <- clean_nordic |>
   count(klubb, sort = TRUE)
 ```
 
+## De som tävlar mest
+
 Hittills har vi främst kollat på antal starter, men som vi vet är det många fäktare som tävlar mycket och rimligen borde stå för en god andel av antalet starter, dessutom finns det fäktare som ställer upp i flera klasser. Låt oss kolla på hur det är med den saken.
 
 Vi har tidigare kunnat konstatera att det är `r clean_nordic |> nrow()` starter, men antalet unka fäktare är `r clean_nordic |> distinct(namn) |> count()` . Det måste innebära att varje tävlingsfäktare har ställt upp i 3 tävlingar i genomsnitt. Men troligen är alla inte genomsnittliga. Låt oss kolla på vilka som är flitigast när det gäller tävlande.
@@ -73,7 +75,3 @@ clean_nordic |>
 ```
 
 Wow, imponerande av Liv och Louise att ha hunnit med hela 18 starter, Moa, Matilda och Elda har också legat i hårt.
-
-Det finns många fler insikter att hämta ur tävlingsstatistiken, men det får anstä till nägsta gång.
-
-Vi hörs igen snart!
