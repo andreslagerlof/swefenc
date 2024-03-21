@@ -32,7 +32,7 @@ clean_nordic <- clean_2023 |>
 
 ```
 
-## Dataunderlag
+## Dataunderlaget
 
 Datat som ligger till grund för det som skrivs här kommer från de tävlingar som finns listade på Svenska [Fäktförbundets hemsida](https://svenskfaktning.se/landslag/svensk-ranking-och-uttagningskriterier/) och som därifrån länkas vidare till [OphardtOnline](https://fencing.ophardt.online/sv/search/rankings/3?season=2023) varifrån man kan välja år. Här har jag valt alla tävlingar som ingår i de olika rankinglistorna (Masters, Nationell Ranking och Uttagning EM/VM) för värja i samtliga ålderskategorier. Desstuom ingår resultat från [S:t Erikscupen](https://fencing.ophardt.online/sv/search/rankings/72) som också den finns OphardtOnline.
 
