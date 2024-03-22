@@ -121,3 +121,35 @@ clean_nordic |>
 ```
 
 Wow! I "de fyras gäng" är Liv och Louise dominanta i klasserna U17 och U20 men Louise i denna grupp ensam om att också göra ett djupt avtryck i seniorklassen. Filip har sina segrar i U15 och U20. Den unga Sofia gör stort avtryck i klasserna U13, U15 och U20.
+
+## Pallplatser
+
+Att bara räkna segrar ger inte en fullständig bild över duktiga fäktare, att placera sig på pållen är också en bragd. Vi vidgar därför sökfältet till att ta reda på vilka som har lyckat ta sig så långt.
+
+```{r}
+clean_nordic |> 
+  filter(plats < 4) |> 
+  count(namn, klubb, sort = TRUE) |> 
+  slice_head(n =15) |> 
+  ggplot(aes(x = n, y = fct_reorder(namn, n)))+
+  geom_col(aes(fill = klubb))  +
+  geom_text(aes(label = n), hjust = 1.5, col = "white", fontface = "bold") +
+  scale_fill_brewer(palette = "Paired") +
+  labs(
+    title = "Fäktare med flest antal pallplatser",
+    subtitle = "De 15 fäktarna med flest pallplatser, 2023",
+    x = element_blank(),
+    y = element_blank()
+  ) +
+  theme_fff() +
+  theme(legend.position="bottom",
+        legend.title = element_blank())
+```
+
+Nu fördjupas bilde med fler nyanser. Flera av fäktarna som vi redan stiftade bekanskap med i tabellen över segrare dyker upp igen, men i en annan rangordning.
+
+Nu får det var nog!
+
+Det finns dock ytterligare en dimension som vi ännu inte utforskat – klubbtillhörighet. Det ska vi titta närmare på nästa gång.
+
+Vi ses då!
