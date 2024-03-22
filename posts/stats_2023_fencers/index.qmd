@@ -1,0 +1,123 @@
+---
+title: "Mer om de tävlande"
+author: "Andrés Lagerlöf"
+date: "2024-03-22"
+execute: 
+  echo: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+
+library(here)
+
+source(here("assets", "source_files", "libraries_load.R"))
+
+source(here("assets", "custom_functions", "ggplot_theme.R"))
+```
+
+```{r}
+#| label: read_and_prep_data
+
+
+clean_2023 <- readRDS(here("assets", "data", "clean_2023.rds"))
+
+clean_nordic <- clean_2023 |> 
+  filter(status == "N")
+
+no_starts_club <- clean_nordic |> filter(status == "N") |> 
+  count(klubb, sort = TRUE)
+
+no_starts_ind <- clean_nordic |> filter(status == "N") |> 
+  count(namn, klubb, sort = TRUE)
+
+klubb_athlete <- clean_nordic |>  
+  count(klubb, namn, sort = TRUE)
+
+athletes_per_club <- klubb_athlete |> 
+  select(-n) |> 
+  count(klubb, sort = TRUE) |> 
+  na.omit()
+
+victories <- clean_nordic |> 
+  filter(plats == 1) |> 
+  count(namn, klubb, sort = TRUE)
+
+top_3_places <- clean_nordic |> 
+  filter(plats > 4) |> 
+  count(klubb, sort = TRUE)
+```
+
+## De som tävlar mest
+
+Hittills har vi främst kollat på antal starter, men som vi vet är det många fäktare som tävlar mycket och rimligen borde stå för en god andel av antalet starter, dessutom finns det fäktare som ställer upp i flera klasser. Låt oss kolla på hur det är med den saken.
+
+Vi har tidigare kunnat konstatera att det är `r clean_nordic |> nrow()` starter, men antalet unka fäktare är `r clean_nordic |> distinct(namn) |> count()` . Det måste innebära att varje tävlingsfäktare har ställt upp i 3 tävlingar i genomsnitt. Men troligen är alla inte genomsnittliga. Låt oss kolla på vilka som är flitigast när det gäller tävlande.
+
+```{r}
+#| label: no_starts_per_fencer
+
+clean_nordic |>
+  count(namn, klubb, sort = TRUE) |> 
+  filter(n > 9) |> # Add ranking
+  mutate(rank = min_rank(desc(n))) |>
+  relocate(rank, everything()) |>
+  gt() |>
+  tab_header(
+    title = "Flitigaste tävlande under 2023", 
+    subtitle = "Fäktare med minst 10 starter") |>
+  cols_label(
+    namn = "Fäktare", 
+    n = "Antal starter", 
+    rank = "#")
+
+```
+
+Wow, imponerande av Liv och Louise att ha hunnit med hela 18 starter, Moa, Matilda och Elda har också legat i hårt.
+
+## Segrare
+
+Att tävla mycket visar ju på ett glödande intresse och vilja att anta utmaningar, men hur väl lyckas olika fäktare. Ett sätt att se på saken är att kolla in vem, eller vilka, som vinner tävlingar. Eftersom endast en fäktare kan vinna så har det funnits total `r clean_nordic |> distinct(competition, age, gender) |> count()` möjligheter att vinna. Samtidigt kan vi konatatera att endast `r victories |> nrow()` har lyckat klättra allra högst upp på pallen. Det är således några fäktare som vinner ofta. Eftersom det är en sådan prestation att vinna är det värt att uppmärksamma alla dessa enastående fäktare.
+
+```{r}
+#| label: table_of_winners
+
+victories |> 
+  rename(
+    "Namn" = namn,
+    "Klubb" = klubb,
+    "Antal segrar" = n) |> 
+  gt() |> 
+  tab_header(
+    title = "Fäktare som vunnit tävlingar under 2023",
+    subtitle = "Svenska och nordiska tävlingar") |> 
+  tab_source_note(source_note = "Resultat från: OphardtOnline")
+
+```
+
+Stort grattis till alla segrare, och imponerande av Louise. Om man tittar de 4 första, som bryter alla mönster kan man konstatera att dom tillsammans håvade in hela `r victories |> slice_head(n = 5) |> count(wt=n)` segrar, eller med andra ord, de 4 bästa fäktarna (i antal segrar räknat) stod för över än hälften av alla segrar under året.
+
+Vore det inte intressant att kolla på: i vilka klasser som de 4 som vunnit mest har hämtat sina segrar? Självklart! Här är en översikt:
+
+```{r}
+clean_nordic |> 
+  filter(plats == 1) |> 
+  count(namn,age, sort = TRUE) |> 
+  filter(namn %in% c("ULLTJÄRN Louise", "OLSSON Liv", "ZIMMERMAN Filip", "ANDERSSON Sophia")) |>
+  ggplot(aes(x = n, y = fct_reorder(namn, n)))+
+  geom_col(fill = "steelblue")  +
+  geom_text(aes(label = n), hjust = 1.5, col = "white", fontface = "bold") +
+  theme_light() +
+  facet_wrap(~ age) +
+  labs(
+    title = "Segrar i olika åldersklasser",
+    subtitle = "De 4 fäktarna med flest segrar",
+    x = element_blank(),
+    y = element_blank()
+  )
+  
+  
+```
+
+Wow! I "de fyras gäng" är Liv och Louise dominanta i klasserna U17 och U20 men Louise i denna grupp ensam om att också göra ett djupt avtryck i seniorklassen. Filip har sina segrar i U15 och U20. Den unga Sofia gör stort avtryck i klasserna U13, U15 och U20.

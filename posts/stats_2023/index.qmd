@@ -32,7 +32,7 @@ clean_nordic <- clean_2023 |>
 
 ```
 
-## Dataunderlaget
+|> ## Dataunderlaget
 
 Datat som ligger till grund för det som skrivs här kommer från de tävlingar som finns listade på Svenska [Fäktförbundets hemsida](https://svenskfaktning.se/landslag/svensk-ranking-och-uttagningskriterier/) och som därifrån länkas vidare till [OphardtOnline](https://fencing.ophardt.online/sv/search/rankings/3?season=2023) varifrån man kan välja år. Här har jag valt alla tävlingar som ingår i de olika rankinglistorna (Masters, Nationell Ranking och Uttagning EM/VM) för värja i samtliga ålderskategorier. Desstuom ingår resultat från [S:t Erikscupen](https://fencing.ophardt.online/sv/search/rankings/72) som också den finns OphardtOnline.
 
@@ -40,7 +40,7 @@ Datat som ligger till grund för det som skrivs här kommer från de tävlingar 
 Detta innebär att uppgifterna inte omfattar lagtävlingar, andra vapen än värja eller veteranklasser.
 :::
 
-Sammantaget är det därför `r clean_2023 |> filter(status == "N") |> distinct(competition) |> count()` unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier, vilket ger en lista på `r clean_nordic |> distinct(competition, age) |> count()` tävlingar.
+Sammantaget är det därför **`r clean_2023 |> filter(status == "N") |> distinct(competition) |> count()`** unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier samt dam- och herrklass, vilket ger en lista på **`r clean_nordic |> distinct(competition, age, gender) |> count()`** tävlingar.
 
 ```{r}
 competitions <- clean_2023 |> 
@@ -66,7 +66,7 @@ Som ni ser ingår det, förutom svenska tävlingar, några få nordiska tävling
 
 ## En titt på de som tävlat
 
-Totalt rör det sig om `r clean_nordic |> nrow()` starter varav de flesta, eller närmare bestämt `r clean_nordic |> filter(nation == "SWE") |> count()` kommer från Sverige . Men även fäktare från andra länder finns med i dataunderlaget, inklusive Sverige rör det sig om `r clean_nordic |> distinct(nation) |> count()` nationer. Här kan man se vilka som är de 15 vanligaste nationaliteterna bland de startande
+Totalt rör det sig om **`r clean_nordic |> nrow()`** starter varav de flesta, eller närmare bestämt **`r clean_nordic |> filter(nation == "SWE") |> count()`** kommer från Sverige . Men även fäktare från andra länder finns med i dataunderlaget, inklusive Sverige rör det sig om **`r clean_nordic |> distinct(nation) |> count()`** nationer. Här kan man se vilka som är de 15 vanligaste nationaliteterna bland de startande
 
 ```{r}
 #| label: nationality_starters
