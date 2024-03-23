@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -200,78 +200,57 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1711062000000" data-listing-file-modified-sort="1711187976935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="958">
-<a href="./posts/2023-03-22-stats_2023_fencers/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts\2023-03-22-stats_2023_fencers\index_files\figure-html\unnamed-chunk-5-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Mer om de tävlande
-</h5>
-<div class="card-text listing-description">
-Hittills har vi främst kollat på antal starter, men som vi vet är det många fäktare som tävlar mycket och rimligen borde stå för en god andel av antalet starter, dessutom…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Andrés Lagerlöf
-</div>
-<div class="listing-date">
-Mar 22, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1679526000000" data-listing-file-modified-sort="1711188850974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1195">
-<a href="./posts/2023-03-23-stats_2023_clubs/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts\2023-03-23-stats_2023_clubs\index_files\figure-html\unnamed-chunk-3-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Analys av tävlandes klubbtillhörighet
-</h5>
-<div class="card-text listing-description">
-Sedan tidigare vet vi ju att det totalt 1941 starter i de tävlingar, de representerar 87 olika klubbar, låt oss gräva vidare. Exempelvis skulle det vara intressant att veta…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Andrés Lagerlöf
-</div>
-<div class="listing-date">
-Mar 23, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1679353200000" data-listing-file-modified-sort="1711188134965" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1005">
-<a href="./posts/2023-03-21-general_stats_2023/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts\2023-03-21-general_stats_2023\index_files\figure-html\by_gender-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Tävlingsstatistik 2023
-</h5>
-<div class="card-text listing-description">
-I detta första inlägg tänker jag göra en första granskning av vad dataunderlaget kan säga oss om hur många som har tävlat under 2023. Men först lite om den information som…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Andrés Lagerlöf
-</div>
-<div class="listing-date">
-Mar 21, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Date
+</th>
+<th>
+Title
+</th>
+<th>
+Author
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-listing-date-sort="1711062000000" data-listing-file-modified-sort="1711187976935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="958" data-listing-title-sort="Mer om de tävlande" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Mar 22, 2024</span>
+</td>
+<td>
+<a href="./posts/2023-03-22-stats_2023_fencers/index.html" class="title listing-title">Mer om de tävlande</a>
+</td>
+<td>
+<span class="listing-author">Andrés Lagerlöf</span>
+</td>
+</tr>
+<tr data-index="1" data-listing-date-sort="1679526000000" data-listing-file-modified-sort="1711188850974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1195" data-listing-title-sort="Analys av tävlandes klubbtillhörighet" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Mar 23, 2023</span>
+</td>
+<td>
+<a href="./posts/2023-03-23-stats_2023_clubs/index.html" class="title listing-title">Analys av tävlandes klubbtillhörighet</a>
+</td>
+<td>
+<span class="listing-author">Andrés Lagerlöf</span>
+</td>
+</tr>
+<tr data-index="2" data-listing-date-sort="1679353200000" data-listing-file-modified-sort="1711188134965" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1005" data-listing-title-sort="Tävlingsstatistik 2023" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Mar 21, 2023</span>
+</td>
+<td>
+<a href="./posts/2023-03-21-general_stats_2023/index.html" class="title listing-title">Tävlingsstatistik 2023</a>
+</td>
+<td>
+<span class="listing-author">Andrés Lagerlöf</span>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>

@@ -3,7 +3,7 @@ title: "En blog om svensk fäktstatistik"
 listing:
   contents: posts
   sort: "date desc"
-  type: grid
+  type: table
   sort-ui: false
   filter-ui: false
 page-layout: full
