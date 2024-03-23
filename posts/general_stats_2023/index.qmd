@@ -1,7 +1,7 @@
 ---
 title: "Tävlingsstatistik 2023"
 author: "Andrés Lagerlöf"
-date: "2023-03-23"
+date: "2023-03-21"
 execute: 
   echo: false
   warning: false
@@ -32,13 +32,7 @@ clean_nordic <- clean_2023 |>
 
 ```
 
-|> ## Dataunderlaget
-
-Datat som ligger till grund för det som skrivs här kommer från de tävlingar som finns listade på Svenska [Fäktförbundets hemsida](https://svenskfaktning.se/landslag/svensk-ranking-och-uttagningskriterier/) och som därifrån länkas vidare till [OphardtOnline](https://fencing.ophardt.online/sv/search/rankings/3?season=2023) varifrån man kan välja år. Här har jag valt alla tävlingar som ingår i de olika rankinglistorna (Masters, Nationell Ranking och Uttagning EM/VM) för värja i samtliga ålderskategorier. Desstuom ingår resultat från [S:t Erikscupen](https://fencing.ophardt.online/sv/search/rankings/72) som också den finns OphardtOnline.
-
-::: callout-important
-Detta innebär att uppgifterna inte omfattar lagtävlingar, andra vapen än värja eller veteranklasser.
-:::
+\|\> \## Dataunderlaget
 
 Sammantaget är det därför **`r clean_2023 |> filter(status == "N") |> distinct(competition) |> count()`** unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier samt dam- och herrklass, vilket ger en lista på **`r clean_nordic |> distinct(competition, age, gender) |> count()`** tävlingar.
 
@@ -185,7 +179,9 @@ clean_nordic |>
   theme_fff()
 ```
 
-IIntressant, här kan vi se att `r clean_nordic |> count(competition, sort = TRUE) |> filter(n >= 100) |> count()` har haft 100 eller fler deltagare. Intressant nog gick endast en av dessa tävlingar i Stockholm nämligen Fillol.
+Intressant, här kan vi se att `r clean_nordic |> count(competition, sort = TRUE) |> filter(n >= 100) |> count()` tävlingar har haft 100 eller fler deltagare. Intressant nog gick endast en av dessa tävlingar i Stockholm nämligen Fillol.
+
+S:t Erikscupen måste också nämnas i sammanhanget, inte bara för att 3 av de 15 största tävlinga är deltävlingar i S:t Erikscupen, men ser man till alla deltävlingarna så har S:t Erik lockat till inte mindre än **`r clean_nordic |> filter(str_starts(competition, "2023 S:t Erikscupen")) |> nrow()`** starter. Det är svårt att överskatta vikten av denna tävling då den, för en stor mängd ungdomar, är det första trappsteget in till vidare tävlande. Hatten av till Stockholms Fäktförbund och alla klubbar, ledare och föräldrar som stäler upp med arrangemanget!
 
 Nu räcker det för den här gången. Nästa gång ska vi se om vi kan ta reda på lite mer om de fäktare som tävlar.
 

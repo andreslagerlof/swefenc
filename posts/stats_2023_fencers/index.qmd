@@ -74,7 +74,7 @@ clean_nordic |>
 
 ```
 
-Wow, imponerande av Liv och Louise att ha hunnit med hela 18 starter, Moa, Matilda och Elda har också legat i hårt.
+Wow, imponerande av Louise, Liv och Moa att ha hunnit med hela 19, 18 och 17 starter, Matilda och Elda har också legat i hårt. Också värt att notera att det är först på plats 14 som vi ser de första killarna i form av Marco och Ivan. De unga tjejerna är således överlägsna när det gäller starter.
 
 ## Segrare
 
@@ -96,9 +96,9 @@ victories |>
 
 ```
 
-Stort grattis till alla segrare, och imponerande av Louise. Om man tittar de 4 första, som bryter alla mönster kan man konstatera att dom tillsammans håvade in hela `r victories |> slice_head(n = 5) |> count(wt=n)` segrar, eller med andra ord, de 4 bästa fäktarna (i antal segrar räknat) stod för över än hälften av alla segrar under året.
+Stort grattis till alla segrare, och imponerande av Louise. Om man tittar de 4 första i tabellen ovan, som bryter alla mönster kan man konstatera att dom tillsammans håvade in hela `r victories |> slice_head(n = 5) |> count(wt=n)` segrar, eller med andra ord, de 4 bästa fäktarna (i antal segrar räknat) stod för över än hälften av alla segrar under året.
 
-Vore det inte intressant att kolla på: i vilka klasser som de 4 som vunnit mest har hämtat sina segrar? Självklart! Här är en översikt:
+Vore det inte intressant att kolla på: i vilka klasser som dessa 4 som vunnit mest har hämtat sina segrar? Självklart! Här är en översikt:
 
 ```{r}
 clean_nordic |> 
@@ -120,7 +120,7 @@ clean_nordic |>
   
 ```
 
-Wow! I "de fyras gäng" är Liv och Louise dominanta i klasserna U17 och U20 men Louise i denna grupp ensam om att också göra ett djupt avtryck i seniorklassen. Filip har sina segrar i U15 och U20. Den unga Sofia gör stort avtryck i klasserna U13, U15 och U20.
+Wow! I gruppena Louise, Filip, Liv och Sophua är Liv och Louise dominanta i klasserna U17 och U20 men Louise i denna grupp ensam om att också göra ett djupt avtryck i seniorklassen. Filip har sina segrar i U15 och U20. Den unga Sofia gör stort avtryck i klasserna U13, U15 och U20.
 
 ## Pallplatser
 
@@ -146,7 +146,7 @@ clean_nordic |>
         legend.title = element_blank())
 ```
 
-Nu fördjupas bilde med fler nyanser. Flera av fäktarna som vi redan stiftade bekanskap med i tabellen över segrare dyker upp igen, men i en annan rangordning.
+Nu fördjupas bilde med fler nyanser. Flera av fäktarna som vi redan stiftade bekanskap med i tabellen över segrare dyker upp igen, men i en annan rangordning. Återigen är Louises resultat utan jämförelse, men alla på listan förtjänar all respekt.
 
 Nu får det var nog!
 
