@@ -78,7 +78,7 @@ Wow, imponerande av Louise, Liv och Moa att ha hunnit med hela 19, 18 och 17 sta
 
 ## Segrare
 
-Att tävla mycket visar ju på ett glödande intresse och vilja att anta utmaningar, men hur väl lyckas olika fäktare. Ett sätt att se på saken är att kolla in vem, eller vilka, som vinner tävlingar. Eftersom endast en fäktare kan vinna så har det funnits total `r clean_nordic |> distinct(competition, age, gender) |> count()` möjligheter att vinna. Samtidigt kan vi konatatera att endast `r victories |> nrow()` har lyckat klättra allra högst upp på pallen. Det är således några fäktare som vinner ofta. Eftersom det är en sådan prestation att vinna är det värt att uppmärksamma alla dessa enastående fäktare.
+Att tävla mycket visar ju på ett glödande intresse och vilja att anta utmaningar, men hur väl lyckas olika fäktare? Ett sätt att se på saken är att kolla in vem, eller vilka, som vinner tävlingar. Eftersom endast en fäktare kan vinna så har det funnits total `r clean_nordic |> distinct(competition, age, gender) |> count()` möjligheter att vinna. Samtidigt kan vi konatatera att endast `r victories |> nrow()` har lyckat klättra allra högst upp på pallen. Det är således några fäktare som vinner ofta. Eftersom det är en sådan prestation att vinna är det värt att uppmärksamma alla dessa enastående fäktare.
 
 ```{r}
 #| label: table_of_winners

@@ -32,8 +32,6 @@ clean_nordic <- clean_2023 |>
 
 ```
 
-\|\> \## Dataunderlaget
-
 Sammantaget är det därför **`r clean_2023 |> filter(status == "N") |> distinct(competition) |> count()`** unika tävlingar vars resultat ingår. Vidare har måga av dessa tävlingar flera ålderskategorier samt dam- och herrklass, vilket ger en lista på **`r clean_nordic |> distinct(competition, age, gender) |> count()`** tävlingar.
 
 ```{r}

@@ -49,7 +49,7 @@ top_3_places <- clean_nordic |>
   count(klubb, sort = TRUE)
 ```
 
-Sedan tidigare vet vi ju att det totalt `r nrow(clean_nordic)` starter i de tävlingar, de representerar `r clean_nordic |> distinct(klubb) |> count()` olika klubbar, låt oss gräva vidare, tävlar alla lika mycket? Vi börjar att kolla på de klubbar som har flest starter.
+Sedan tidigare vet vi ju att det totalt `r nrow(clean_nordic)` starter i de tävlingar, de representerar `r clean_nordic |> distinct(klubb) |> count()` olika klubbar, låt oss gräva vidare. Exempelvis skulle det vara intressant att veta hur tävlandet ser ut mellan klubbar. Vi börjar att kolla på de klubbar som har flest starter.
 
 ```{r}
 clean_nordic |> 
@@ -160,9 +160,9 @@ Inte överraskande kanske att den största klubben också har störst trupper p�
 
 ## Fundering
 
-Med god inblick i FFF kan man konstatera att den omställning som gjordes för några år sedan som innebar en kraftig satsning på en ambitios ungdomsverksamhet med den högsta träningskvalitet som vi kan åstadkomma har lagt grunden till de resultat som siffrorna ovan visar.
+Med god inblick i FFF kan man konstatera att den omställning som gjordes för några år sedan som innebar en kraftig satsning på en ambitiös ungdomsverksamhet med den högsta träningskvalitet som vi kan åstadkomma har lagt grunden till de resultat som siffrorna ovan visar.
 
-Att som FFFare se att min klubb både är störst och bäst kanske skulle vara endast glädjande, men dessvärre väcker detta också andra frågor och en hel del oro. Hur kan övriga fäktsverige bli bättre? Förvisso är FFFarna, iallafall i de yngre åldersklasseran, sannolikt internationellt konkurrenskraftiga, men att på seniorsidan är så inte fallet. Vi vill självklart vara bäst, men det måste finnas en sund och positiv konkurrens.
+Att som FFFare se att min klubb både är störst och bäst kanske skulle vara endast glädjande, men dessvärre väcker detta också andra frågor och en hel del oro. Hur kan övriga fäktsverige bli bättre? Förvisso är FFFarna, iallafall i de yngre åldersklasseran, sannolikt internationellt konkurrenskraftiga, men så är det tyvärr inte på seniorsidan. Vi vill självklart vara bäst, men det måste finnas en sund och positiv konkurrens.
 
 I Stockholm finns ett bra samarbete mellan klubbar som gör att samträningar är vanliga, vilket är positivt och måste fortsätta att uppmuntras. Jag vet också att FFFs tränare aktivt arbetar för att hjälpa fäktare från andra klubbar, med exempelvis veckovisa livestreamade träningar, där Kungsbackas fäktare kan träna på samma sätt som vi, detta har pågått i mer än ett år.
 
